@@ -34,16 +34,4 @@ window.PROJECTS = [
     repo: "https://github.com/nazli-akmali/meal-recommender",
     image: "",
   },
-  {
-    title: "GymT",
-    summary: {
-      en: "A gym tracker for iOS and Android: equipment mapped to muscles, workout plans, guided sessions with timers you can control from the lock screen, and progress reports.",
-      de: "Ein Gym-Tracker für iOS und Android: Geräte nach Muskelgruppen, Trainingspläne, geführte Einheiten mit Timern, die sich vom Sperrbildschirm aus steuern lassen, und Fortschrittsberichte.",
-    },
-    tags: ["Flutter", "iOS", "Android"],
-    status: { en: "In progress", de: "In Arbeit" },
-    page: "",
-    repo: "https://github.com/nazli-akmali/gymt",
-    image: "",
-  },
 ];
