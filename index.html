@@ -3,62 +3,204 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Nazli Akmali</title>
-  <meta name="description" content="Nazli Akmali – portfolio and projects.">
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23c2410c'/><text x='16' y='22' font-family='Georgia,serif' font-size='18' fill='white' text-anchor='middle'>N</text></svg>">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="styles.css">
+  <title>Nazli Akmali · Data Analyst</title>
+  <meta name="description" content="Nazli Akmali, data analyst with an M.Sc. in Economics (Behavioral Economics) from Heidelberg University. Experience, projects and contact.">
+  <meta name="theme-color" content="#F5F2EC" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1A1A1C" media="(prefers-color-scheme: dark)">
+  <meta property="og:title" content="Nazli Akmali · Data Analyst">
+  <meta property="og:description" content="Data analyst with a background in behavioral economics and product analytics.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nazli-akmali.github.io/">
+  <link rel="canonical" href="https://nazli-akmali.github.io/">
+  <link rel="alternate" hreflang="en" href="https://nazli-akmali.github.io/">
+  <link rel="alternate" hreflang="de" href="https://nazli-akmali.github.io/de/">
+  <link rel="alternate" hreflang="x-default" href="https://nazli-akmali.github.io/">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%233F6B5A'/%3E%3Ctext x='16' y='22' font-family='Georgia,serif' font-size='17' font-weight='600' fill='white' text-anchor='middle'%3ENA%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="site.css">
+  <link rel="stylesheet" href="portfolio.css">
 </head>
 <body>
-  <header class="wrap top">
-    <a class="brand" href="#">Nazli Akmali</a>
-    <nav>
-      <a href="#projects">Projects</a>
-      <a href="#contact">Contact</a>
-    </nav>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="./">Nazli Akmali</a>
+      <nav class="topnav" aria-label="Main">
+        <a href="#projects">Projects</a>
+        <a class="hide-sm" href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+        <a class="lang" href="de/" hreflang="de" lang="de" aria-label="Deutsche Version">DE</a>
+      </nav>
+    </div>
   </header>
 
   <main>
-    <section class="wrap hero">
-      <p class="eyebrow">Hi, I'm Nazli</p>
-      <!-- EDIT: your headline -->
-      <h1>I build small, useful products and learn from the people who use them.</h1>
-      <!-- EDIT: a few sentences about you -->
-      <p class="lede">
-        I enjoy taking an everyday problem (what to wear, what to cook, how to
-        train) and turning it into something people can try: from product
-        discovery and UX iteration through to a working app. Below are a few
-        things I've made. Each has its own page with a live demo and the story
-        behind it.
-      </p>
-      <div class="hero-links">
-        <a class="btn" href="#projects">See my projects</a>
-        <a class="btn ghost" href="https://github.com/nazli-akmali">GitHub</a>
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <p class="eyebrow">Data Analyst · M.Sc. Economics</p>
+          <h1>Nazli Akmali</h1>
+          <p class="lead">I turn product and user data into decisions teams can act on.</p>
+          <p class="muted">Data analyst with a background in behavioural economics and two years of product analytics in ad tech. Based in Heidelberg with a German work permit, and looking for my next role in data or product analytics.</p>
+          <div class="btns">
+            <a class="btn primary" href="#contact">Get in touch
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+            <a class="btn" href="#projects">See my projects</a>
+          </div>
+        </div>
+        <div class="portrait-wrap">
+          <!-- PHOTO: save your photo as images/profile.jpg, then replace the span below with:
+               <img src="images/profile.jpg" alt="Portrait of Nazli Akmali" width="680" height="850"> -->
+          <div class="portrait"><span class="initials" aria-hidden="true">NA</span></div>
+        </div>
       </div>
     </section>
 
-    <section id="projects" class="wrap">
-      <h2>Projects</h2>
-      <div class="grid" id="project-grid"></div>
-      <noscript><p>Turn on JavaScript to see the project list, or browse <a href="https://github.com/nazli-akmali">my GitHub</a>.</p></noscript>
+    <div class="facts">
+      <div class="wrap">
+        <dl>
+          <div><dt>Based in</dt><dd>Heidelberg, Germany</dd></div>
+          <div><dt>Focus</dt><dd>Product and data analytics</dd></div>
+          <div><dt>Toolkit</dt><dd>SQL, R, Python, Metabase</dd></div>
+          <div><dt>Languages</dt><dd>English C1 · German C1 · Persian (native)</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <section class="block" id="about">
+      <div class="wrap">
+        <div class="intro">
+          <p class="eyebrow">About me</p>
+          <h2>Numbers are most useful when they explain how people behave.</h2>
+          <p>My M.Sc. in Economics at Heidelberg University focused on behavioural economics: applied econometrics, advanced statistical analysis and modelling behavioural data. Before that I spent two years at Yektanet, a digital advertising platform with over 60 million daily users, first as a working student in product analytics and then as a product management intern focused on data analysis.</p>
+          <p>There I learned to work close to the product: finding where things break, building the dashboards teams check every day, and turning analysis into concrete backlog items. On the side, I build small apps of my own to practise the full product cycle, from discovery to a working MVP.</p>
+        </div>
+      </div>
     </section>
 
-    <section id="contact" class="wrap contact">
-      <h2>Get in touch</h2>
-      <p>The best way to reach me is through any of these:</p>
-      <ul class="contact-links">
-        <li><a href="https://github.com/nazli-akmali">GitHub</a></li>
-        <!-- EDIT: uncomment and fill in the ones you want public -->
-        <!-- <li><a href="https://www.linkedin.com/in/YOUR-HANDLE">LinkedIn</a></li> -->
-        <!-- <li><a href="mailto:you@example.com">Email</a></li> -->
-      </ul>
+    <section class="block" id="experience">
+      <div class="wrap">
+        <div class="intro">
+          <p class="eyebrow">Experience</p>
+          <h2>Product analytics in ad tech</h2>
+        </div>
+        <ol class="timeline">
+          <li class="role">
+            <div>
+              <div class="when">Aug 2022 – Jul 2023</div>
+              <div class="org">Yektanet</div>
+              <p class="org-note">Digital advertising platform, 60M+ daily users</p>
+            </div>
+            <div>
+              <h3>Product Management Intern, data analysis focus</h3>
+              <ul>
+                <li>Analysed ad-verification data to find the sources of errors and implemented automation rules that raised product stability from <strong>75% to 99%</strong>.</li>
+                <li>Built KPI dashboards in Metabase to monitor product performance and user engagement.</li>
+                <li>Derived product improvements from customer data and market research, and presented the findings in monthly team meetings.</li>
+                <li>Maintained the product backlog in Jira and documented system updates in Confluence, supporting on-time delivery in tight sprints.</li>
+              </ul>
+            </div>
+          </li>
+          <li class="role">
+            <div>
+              <div class="when">Oct 2021 – Jul 2022</div>
+              <div class="org">Yektanet</div>
+              <p class="org-note">Digital advertising platform, 60M+ daily users</p>
+            </div>
+            <div>
+              <h3>Working Student, Product Analytics</h3>
+              <ul>
+                <li>Extracted and analysed campaign and publisher data with SQL to identify performance trends and give stakeholders actionable insights.</li>
+                <li>Built Metabase dashboards for tailored bundle recommendations, supporting targeted sales proposals worth over <strong>€100,000</strong>.</li>
+                <li>Modelled publisher performance metrics in Excel and SQL and developed data-driven evaluation criteria that helped lower cost per click by <strong>10%</strong>.</li>
+                <li>Ran data-driven market analyses to evaluate adding cost-per-action (CPA) campaigns.</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+      </div>
     </section>
+
+    <section class="block" id="projects">
+      <div class="wrap">
+        <div class="intro">
+          <p class="eyebrow">Projects</p>
+          <h2>Things I've built</h2>
+          <p>Small products I design and build end to end, with AI-assisted implementation. Each one has its own page with a live demo and the story behind it.</p>
+        </div>
+        <div class="projects" id="project-grid"></div>
+        <noscript><p>Turn on JavaScript to see the project list, or browse <a href="https://github.com/nazli-akmali">my GitHub</a>.</p></noscript>
+
+        <h3 class="sub">Research</h3>
+        <div class="cards-2">
+          <article class="card">
+            <p class="kicker">Master's thesis</p>
+            <h3>Risk-taking under social influence: the effect of demographic cues</h3>
+            <ul>
+              <li>Collected experimental data from 158 participants, then cleaned and analysed it in R.</li>
+              <li>Examined how demographic similarity relates to switching decisions, using logistic regressions with cluster-robust standard errors.</li>
+            </ul>
+          </article>
+          <article class="card">
+            <p class="kicker">Course project</p>
+            <h3>Gender equity in the SaaS industry: a cross-country study</h3>
+            <ul>
+              <li>Processed survey data from 250 employees in R.</li>
+              <li>Ran regression analyses to quantify labour-market disparities and pay gaps.</li>
+            </ul>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="education">
+      <div class="wrap two-col">
+        <div>
+          <p class="eyebrow">Education</p>
+          <h2>Economics, with a behavioural lens</h2>
+          <div class="cards-2">
+            <article class="card">
+              <p class="kicker">Oct 2023 – Feb 2026</p>
+              <h3>M.Sc. Economics (Behavioral Economics)</h3>
+              <p class="muted">Heidelberg University. Focus on applied econometrics, advanced statistical analysis and behavioural data modelling.</p>
+            </article>
+            <article class="card">
+              <p class="kicker">Sep 2019 – Sep 2023</p>
+              <h3>B.Sc. Economics</h3>
+              <p class="muted">Allameh Tabataba'i University. Graduated in the top 20% of the cohort, with exam-free admission to the master's programme through the talent programme.</p>
+            </article>
+          </div>
+        </div>
+        <div>
+          <p class="eyebrow">Skills</p>
+          <h2>Tools and methods</h2>
+          <dl class="skills" style="margin-top:24px">
+            <div><dt>Programming and data</dt><dd><ul class="chips"><li>SQL</li><li>R</li><li>Stata</li><li>Python</li></ul></dd></div>
+            <div><dt>BI and visualisation</dt><dd><ul class="chips"><li>Metabase</li><li>Power BI</li><li>Tableau</li><li>Excel</li></ul></dd></div>
+            <div><dt>Methods</dt><dd><ul class="chips"><li>Data analysis</li><li>Data visualisation</li><li>Econometrics</li><li>Experimental research</li><li>KPI tracking</li><li>Regression modelling</li><li>A/B testing</li></ul></dd></div>
+            <div><dt>Product</dt><dd><ul class="chips"><li>Jira</li><li>Confluence</li><li>Backlog management</li><li>Market research</li></ul></dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <div class="wrap" id="contact">
+      <div class="cta">
+        <div>
+          <h2>Let's talk</h2>
+          <p>I'm looking for roles in data analytics and product analytics in Germany. I'd be glad to hear from you.</p>
+        </div>
+        <div class="btns">
+          <a class="btn" href="mailto:nazli.akmaly@gmail.com">Email me</a>
+          <a class="btn ghost" href="https://www.linkedin.com/in/nazli-akmali/">LinkedIn</a>
+        </div>
+      </div>
+    </div>
   </main>
 
-  <footer class="wrap foot">
-    <p>© <span id="year"></span> Nazli Akmali</p>
+  <footer class="footer">
+    <div class="wrap">
+      <span>© <span id="year">2026</span> Nazli Akmali</span>
+      <span><a href="https://github.com/nazli-akmali">GitHub</a> · <a href="https://www.linkedin.com/in/nazli-akmali/">LinkedIn</a> · <a href="de/" hreflang="de" lang="de">Deutsch</a></span>
+    </div>
   </footer>
 
   <script src="projects.js"></script>
