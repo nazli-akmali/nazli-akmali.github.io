@@ -5,9 +5,13 @@
 //   summary  – { en, de } one or two sentences on what it does
 //   tags     – short labels (stack, platform, focus)
 //   status   – optional badge, { en, de }
-//   page     – the project's own showcase URL (leave "" until Pages is on)
-//   repo     – GitHub repository URL
+//   page     – the project page, hosted here at /<slug>/ (leave "" until it's published)
+//   caseStudy – optional case study page URL
+//   repo     – optional GitHub repository URL, only for public repos
 //   image    – optional screenshot URL; hidden automatically if it fails to load
+//
+// Project pages are built in each (private) project repo with
+// `python3 site/build.py --publish`, which copies them into the /<slug>/ folder here.
 
 window.PROJECTS = [
   {
@@ -19,7 +23,7 @@ window.PROJECTS = [
     tags: ["Product discovery", "JavaScript", "Open-Meteo"],
     status: { en: "MVP", de: "MVP" },
     page: "https://nazli-akmali.github.io/outfit-recommender/",
-    repo: "https://github.com/nazli-akmali/outfit-recommender",
+    caseStudy: "https://nazli-akmali.github.io/outfit-recommender/case-study/",
     image: "https://nazli-akmali.github.io/outfit-recommender/images/explained-outfit.png",
   },
   {
@@ -31,7 +35,7 @@ window.PROJECTS = [
     tags: ["Product discovery", "JavaScript", "Local-first"],
     status: { en: "Prototype", de: "Prototyp" },
     page: "https://nazli-akmali.github.io/meal-recommender/",
-    repo: "https://github.com/nazli-akmali/meal-recommender",
+    caseStudy: "https://nazli-akmali.github.io/meal-recommender/case-study/",
     image: "https://nazli-akmali.github.io/meal-recommender/images/ranked-suggestions.png",
   },
 ];

@@ -1,8 +1,8 @@
 (function () {
   var lang = document.documentElement.lang === "de" ? "de" : "en";
   var L = {
-    en: { view: "View project", code: "Code", soon: "Project page coming soon", shot: "Screenshot of " },
-    de: { view: "Zum Projekt", code: "Code", soon: "Projektseite folgt bald", shot: "Screenshot von " },
+    en: { view: "View project", study: "Case study", code: "Code", soon: "Project page coming soon", shot: "Screenshot of " },
+    de: { view: "Zum Projekt", study: "Fallstudie", code: "Code", soon: "Projektseite folgt bald", shot: "Screenshot von " },
   }[lang];
 
   function t(v) { return v && typeof v === "object" ? v[lang] || v.en : v; }
@@ -19,8 +19,8 @@
     var card = el("article", "project");
 
     if (p.image) {
-      // Shown only once the image has loaded, so a project whose Pages site
-      // isn't live yet gets a clean card instead of an empty box.
+      // Shown only once the image has loaded, so a project whose page
+      // isn't published yet gets a clean card instead of an empty box.
       var shot = el("div", "shot");
       shot.hidden = true;
       var img = el("img");
@@ -47,6 +47,7 @@
 
     var actions = el("div", "btns");
     if (p.page) actions.appendChild(link(p.page, "btn primary small", L.view + " →"));
+    if (p.caseStudy) actions.appendChild(link(p.caseStudy, "btn small", L.study));
     if (p.repo) actions.appendChild(link(p.repo, "btn small", L.code));
     if (!p.page) actions.appendChild(el("span", "soon", L.soon));
     body.appendChild(actions);

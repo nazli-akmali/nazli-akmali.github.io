@@ -1,0 +1,239 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meal Planner — Seyedeh Nazli Akmali</title>
+  <meta name="description" content="A personal meal planner that suggests what to cook from your own recipes, based on what you have, your time, your diet and what you've eaten. Product case study and documentation.">
+  <meta name="theme-color" content="#F5F2EC" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#1A1A1C" media="(prefers-color-scheme: dark)">
+  <meta property="og:title" content="Meal Planner">
+  <meta property="og:description" content="Answers “What should I cook?” from your own recipes, then plans the meal and builds the shopping list. Product case study and documentation.">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://nazli-akmali.github.io/meal-recommender/">
+  <meta property="og:image" content="https://nazli-akmali.github.io/meal-recommender/images/ranked-suggestions.png">
+  <link rel="stylesheet" href="site.css">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%233F6B5A'/%3E%3Ccircle cx='16' cy='17' r='6.5' fill='none' stroke='white' stroke-width='1.8'/%3E%3Cpath d='M8 8v6M10 8v6M9 14v11M24 8c-1.6 1.4-2 3.6-2 6h2v11' fill='none' stroke='white' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+</head>
+<body>
+  <header class="topbar">
+    <div class="wrap">
+      <a class="brand" href="https://nazli-akmali.github.io/">Nazli Akmali <span>/ Meal Planner</span></a>
+      <nav class="topnav" aria-label="Project">
+        <a href="case-study/">Case study</a>
+        <a class="hide-sm" href="technical-notes/">Tech notes</a>
+        
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="wrap">
+        <div>
+          <p class="eyebrow">Product case study · Functional prototype</p>
+          <h1>Meal Planner</h1>
+          <p class="lead">Decide what to cook from the recipes you already have.</p>
+          <p class="muted">A browser-based prototype that ranks your own recipes by what’s in your kitchen, how much time you have and what you’ve eaten this week. It then carries the choice through to your plan and a shopping list that keeps itself in sync. There’s no account and no backend.</p>
+          <div class="btns">
+            <a class="btn primary" href="case-study/">Read the case study
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+          </div>
+        </div>
+        <div class="hero-phones" aria-hidden="true">
+          <div class="phone back"><img src="images/home-today.png" alt="" width="390" height="844"></div>
+          <div class="phone front"><img src="images/ranked-suggestions.png" alt="" width="390" height="844"></div>
+        </div>
+      </div>
+    </section>
+
+    <div class="facts">
+      <div class="wrap">
+        <dl>
+          <div><dt>My role</dt><dd>Problem definition, exploratory benchmarking, prioritisation, requirements, iteration</dd></div>
+          <div><dt>Approach</dt><dd>AI-assisted design and implementation</dd></div>
+          <div><dt>Stage</dt><dd>Personal prototype; user validation not yet started</dd></div>
+          <div><dt>Built with</dt><dd>Vanilla JavaScript ES modules, browser storage, no build step</dd></div>
+        </dl>
+      </div>
+    </div>
+
+    <section class="block" id="problem">
+      <div class="wrap">
+        <div class="intro">
+          <p class="eyebrow">The problem</p>
+          <h2>The hard part isn’t planning a week. It’s choosing the next meal.</h2>
+          <p>The project started from my own cooking for two: deciding what to make when nothing comes to mind, with the ingredients already at home, the time available, and some attention to calories, protein, fibre and variety. In an exploratory trial of Eat This Much, the suggested meals didn’t reflect what I had at home, and I wanted my own familiar recipes to come first. That one trial shaped the workflow; it isn’t a verdict on that app.</p>
+          <blockquote class="hypothesis">
+            How might I make choosing the next meal easier without requiring a complete weekly plan, a fully maintained pantry, or detailed food logging?
+            <footer>The question behind the prototype. Its hypotheses haven’t been tested with users yet.</footer>
+          </blockquote>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="how-it-works">
+      <div class="wrap">
+        <div class="intro">
+          <p class="eyebrow">How it works</p>
+          <h2>From “what do I have?” to a planned meal and a shopping list</h2>
+        </div>
+        <ol class="steps">
+          <li class="step">
+            <div class="step-text">
+              <h3>Answer four short questions</h3>
+              <p>Pick the meal, servings and time limit, the day, then tap through the ingredients you have: available, running low, out, or not sure. Star anything the meal must include.</p>
+              <ul>
+                <li>Every step is optional except the meal</li>
+                <li>“Not sure” is never treated as missing</li>
+              </ul>
+            </div>
+            <div class="phone"><img src="images/cook-ingredients.png" alt="Step 4 of 4, 'What do you have?', with ingredient chips marked available, running low, unavailable or not sure" width="390" height="844" loading="lazy"></div>
+          </li>
+          <li class="step">
+            <div class="step-text">
+              <h3>Get up to three ranked, explained matches</h3>
+              <p>Hard filters come first: meal type, time limit, diet and allergies, and required ingredients. The recipes that pass are scored out of 100: ingredients 50, nutrition fit 25 and variety 25.</p>
+              <ul>
+                <li>Each card shows what’s missing or unconfirmed, and why it ranked where it did</li>
+                <li>If nothing fits, the app counts what each filter ruled out and offers single changes with exact counts</li>
+              </ul>
+            </div>
+            <div class="phone"><img src="images/ranked-suggestions.png" alt="Suggestions for dinner, 2 servings, under 45 minutes: Tomato and chickpea pasta scores 84 and a chicken, broccoli and rice bowl scores 83" width="390" height="844" loading="lazy"></div>
+          </li>
+          <li class="step">
+            <div class="step-text">
+              <h3>Choose it for the meal</h3>
+              <p>The recipe page scales ingredients to your servings and shows what you have. <em>Choose for dinner</em> puts it on the plan without marking it eaten, and <em>Add ingredients to shopping list</em> opens a review before anything is added.</p>
+              <ul>
+                <li>Missing, unknown and running-low items are preselected</li>
+                <li>Every action can be undone</li>
+              </ul>
+            </div>
+            <div class="phone"><img src="images/recipe-details.png" alt="Recipe page for a chicken, broccoli and rice bowl with a servings stepper, a 'Choose for dinner · today' button and ingredients with availability checks" width="390" height="844" loading="lazy"></div>
+          </li>
+          <li class="step">
+            <div class="step-text">
+              <h3>Plan the day, log what you actually ate</h3>
+              <p>Day and week views separate what’s <em>planned</em> from what’s <em>eaten</em>. You mark a meal eaten yourself, adjust your portion, or log something that isn’t a saved recipe.</p>
+              <ul>
+                <li>The log keeps a copy of the recipe, so editing the recipe later doesn’t rewrite history</li>
+                <li>Nutrition totals say “partial” instead of counting unknown values as zero</li>
+              </ul>
+            </div>
+            <div class="phone"><img src="images/day-plan.png" alt="Day plan for Tuesday: lunch eaten, dinner planned with a Mark eaten button, and an overnight oats breakfast logged" width="390" height="844" loading="lazy"></div>
+          </li>
+          <li class="step">
+            <div class="step-text">
+              <h3>A shopping list that follows the plan</h3>
+              <p>Ingredients merge across meals, but only when their units are compatible. Each item shows which meals it came from. Change a meal’s servings or remove it, and the linked amounts recalculate with a visible note.</p>
+              <ul>
+                <li>No double counting when a recipe is added twice</li>
+                <li>Ticking an item off updates the inventory</li>
+              </ul>
+            </div>
+            <div class="phone"><img src="images/linked-shopping-list.png" alt="Shopping list with 5 items to buy and 1 bought, each linked to the planned meal and day it is for" width="390" height="844" loading="lazy"></div>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="block" id="decisions">
+      <div class="wrap">
+        <div class="intro">
+          <p class="eyebrow">Key decisions</p>
+          <h2>Incomplete data shouldn’t produce confident answers</h2>
+          <p>Reviewing the original feature ideas turned up places where a straightforward build would mislead people. Most of the design work went into handling the unknowns honestly. The full reasoning is in the <a href="case-study/">case study</a> and the <a href="nutrition-spec/">nutrition and diet spec</a>.</p>
+        </div>
+        <div class="decision">
+          <div class="phone"><img src="images/inventory.png" alt="Inventory screen: 13 have, 2 out, 9 not sure, with Have, Low, Out and Not sure buttons for each ingredient" width="390" height="844" loading="lazy"></div>
+          <div class="changes">
+            <div class="change">
+              <div class="from">Unknown ingredients or nutrition count as zero</div>
+              <div class="to">Unknown scores a neutral ½ and is labelled “Unconfirmed” or “partial”</div>
+              <p class="why">Counting it as zero made recipes with real values rank below recipes with no data.</p>
+            </div>
+            <div class="change">
+              <div class="from">Allergy-friendly results labelled “safe”</div>
+              <div class="to">“No declared allergens found in listed ingredients”, plus what couldn’t be checked</div>
+              <p class="why">Name matching can’t see inside packaged products, so it must not imply a guarantee.</p>
+            </div>
+            <div class="change">
+              <div class="from">Hit nutrition targets by changing servings</div>
+              <div class="to">Suggest <em>your</em> portion (0.75–1.5); the servings you cook never change</div>
+              <p class="why">Changing cooked servings would silently change the shopping list too.</p>
+            </div>
+            <div class="change">
+              <div class="from">An activity multiplier plus exercise on top</div>
+              <div class="to">An everyday-only multiplier, with exercise added separately</div>
+              <p class="why">Standard multipliers already include exercise, so the same activity was counted twice.</p>
+            </div>
+            <div class="change">
+              <div class="from">Mediterranean as a diet filter</div>
+              <div class="to">A soft preference worth up to +3 points</div>
+              <p class="why">It’s a pattern to lean toward, not a list of banned foods. As a filter it would hide most recipes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="status">
+      <div class="wrap">
+        <div class="intro">
+          <p class="eyebrow">Where it stands</p>
+          <h2>A working prototype makes the idea testable. It doesn’t prove it.</h2>
+          <p>Everything runs in the browser and stays there. Receipt scanning, web recipe ideas, diet filters and nutrition targets are all optional and off by default.</p>
+        </div>
+        <div class="status">
+          <div class="card">
+            <h3>Checked so far</h3>
+            <ul>
+              <li>67 logic tests for scoring, filters, units, the shopping list, diet classification and storage migrations</li>
+              <li>Main journeys tested by hand in the browser at desktop and 375 px phone widths</li>
+              <li>Receipt import tested with real on-device OCR on a generated receipt</li>
+              <li>Honest fallbacks: “not sure” states, partial totals, an empty state that explains itself</li>
+            </ul>
+          </div>
+          <div class="card open">
+            <h3>What I’d validate next</h3>
+            <ul>
+              <li>Time from starting discovery to choosing an acceptable meal, and how often the first list is enough</li>
+              <li>Whether ingredient input is worth the effort, and how often stale stock leads to unsuitable suggestions</li>
+              <li>How many real recipes someone needs before personal-first suggestions feel useful</li>
+              <li>Whether the four-step wizard beats a compact preferences form</li>
+              <li>Whether people can tell actual, projected and incomplete nutrition totals apart</li>
+            </ul>
+          </div>
+        </div>
+        <p class="muted" style="margin-top:24px">No user interviews, usability results or retention metrics are claimed. Implementation details are in the <a href="technical-notes/">technical notes</a> and the <a href="docs/">full documentation</a>. The allergen checks are not an allergy safeguard, and the nutrition estimates aren’t medical advice. Sample recipes deliberately carry no nutrition values.</p>
+      </div>
+    </section>
+
+    <div class="wrap">
+      <div class="cta">
+        <div>
+          <h2>The full story</h2>
+          <p>How the idea was tested against existing apps, what changed between iterations, and what still needs validating with users.</p>
+        </div>
+        <div class="btns">
+          <a class="btn primary" href="case-study/">Read the case study</a>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">
+    <div class="wrap">
+      <span>Created by <strong>Seyedeh Nazli Akmali</strong> as a personal product management portfolio project, with AI-assisted implementation.</span>
+      <span><a href="https://nazli-akmali.github.io/">Portfolio</a></span>
+    </div>
+  </footer>
+
+  <script>
+    const bar = document.querySelector('.topbar');
+    const onScroll = () => bar.classList.toggle('scrolled', scrollY > 8);
+    addEventListener('scroll', onScroll, { passive: true }); onScroll();
+  </script>
+</body>
+</html>

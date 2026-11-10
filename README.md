@@ -14,13 +14,29 @@ Plain HTML, CSS and JavaScript. No build step.
 | `portfolio.css` | Portfolio-only additions (portrait, experience, project cards, skills) |
 | `main.js` | Renders the project cards, top-bar behaviour |
 | `images/` | Profile photo and other images |
+| `<project>/` | A project's showcase (landing page, `/app/` demo, case study), built in the project repo. Don't edit by hand |
 
-## Adding a project
+## Projects
 
-1. Build its showcase with the `project-showcase` skill and turn on Pages in
-   that repo. It's served at `https://nazli-akmali.github.io/<repo-name>/`.
-2. Add an entry to `projects.js` with that URL in `page`, and optionally a
-   screenshot URL in `image`.
+Project repos are private. Their showcase pages live here instead, one folder
+per project, so they're served at `https://nazli-akmali.github.io/<repo-name>/`.
+Each folder is a build output copied from the project repo (it contains a
+`.showcase-build` marker); the sources stay in the project's `site/` folder.
+
+**Adding a project**
+
+1. Build its showcase with the `project-showcase` skill. In the project repo,
+   `python3 site/build.py --publish` copies it into `<repo-name>/` here.
+2. Add an entry to `projects.js` with that URL in `page` (and `caseStudy`,
+   `image` if it has them).
+3. Commit and push this repo. Don't turn on GitHub Pages in the project repo:
+   it would take over the same URL.
+
+**Updating a project**
+
+Change the project, run `python3 site/build.py --publish` in its repo again,
+then commit and push both repos. Or ask Claude to update the showcase with the
+`project-showcase` skill.
 
 ## Adding the profile photo
 
