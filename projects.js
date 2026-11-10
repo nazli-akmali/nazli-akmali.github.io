@@ -25,13 +25,13 @@ window.PROJECTS = [
   {
     title: "Meal Planner",
     summary: {
-      en: "Suggests lunch or dinner from your own recipes, based on the ingredients you have, the time you have, your nutrition targets and what you've eaten this week. Keeps an inventory and a shopping list, all in the browser.",
-      de: "Schlägt Mittag- oder Abendessen aus den eigenen Rezepten vor, passend zu den vorhandenen Zutaten, der verfügbaren Zeit, den Ernährungszielen und dem, was diese Woche schon gegessen wurde. Mit Vorrats- und Einkaufsliste, alles im Browser.",
+      en: "Helps choose the next meal from your own recipes, using the ingredients at home, the time you have, recent meals and optional nutrition targets. A product case study, from an exploratory competitor trial to a working prototype with planning and a linked shopping list.",
+      de: "Hilft bei der Wahl der nächsten Mahlzeit aus den eigenen Rezepten, passend zu den vorhandenen Zutaten, der verfügbaren Zeit, den letzten Mahlzeiten und optionalen Ernährungszielen. Eine Produkt-Fallstudie, von einem explorativen Wettbewerbstest bis zum funktionierenden Prototyp mit Planung und verknüpfter Einkaufsliste.",
     },
-    tags: ["Local-first", "JavaScript", "No backend"],
-    status: { en: "MVP", de: "MVP" },
-    page: "",
+    tags: ["Product discovery", "JavaScript", "Local-first"],
+    status: { en: "Prototype", de: "Prototyp" },
+    page: "https://nazli-akmali.github.io/meal-recommender/",
     repo: "https://github.com/nazli-akmali/meal-recommender",
-    image: "",
+    image: "https://nazli-akmali.github.io/meal-recommender/images/ranked-suggestions.png",
   },
 ];
