@@ -38,4 +38,15 @@ window.PROJECTS = [
     caseStudy: "https://nazli-akmali.github.io/meal-recommender/case-study/",
     image: "https://nazli-akmali.github.io/meal-recommender/images/ranked-suggestions.png",
   },
+  {
+    title: "E-commerce Delivery Performance",
+    summary: {
+      en: "An interactive Tableau dashboard on late deliveries across 96,203 orders from the Olist Brazilian e-commerce dataset. It shows when deliveries ran late, how shipping delays drive them and which sellers dispatch late most often.",
+      de: "Ein interaktives Tableau-Dashboard zu verspäteten Lieferungen in 96.203 Bestellungen aus dem brasilianischen Olist-E-Commerce-Datensatz. Es zeigt, wann Lieferungen verspätet waren, wie Versandverzögerungen sie verursachen und welche Verkäufer am häufigsten verspätet versenden.",
+    },
+    tags: ["Data analysis", "Tableau", "KPIs"],
+    status: { en: "Dashboard", de: "Dashboard" },
+    page: "https://nazli-akmali.github.io/ecommerce-delivery/",
+    image: "https://nazli-akmali.github.io/ecommerce-delivery/images/dashboard.png",
+  },
 ];
