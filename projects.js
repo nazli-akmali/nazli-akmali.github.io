@@ -41,12 +41,14 @@ window.PROJECTS = [
   {
     title: "E-commerce Delivery Performance",
     summary: {
-      en: "An interactive Tableau dashboard on late deliveries across 96,203 orders from the Olist Brazilian e-commerce dataset. It shows when deliveries ran late, how shipping delays drive them and which sellers dispatch late most often.",
-      de: "Ein interaktives Tableau-Dashboard zu verspäteten Lieferungen in 96.203 Bestellungen aus dem brasilianischen Olist-E-Commerce-Datensatz. Es zeigt, wann Lieferungen verspätet waren, wie Versandverzögerungen sie verursachen und welche Verkäufer am häufigsten verspätet versenden.",
+      en: "An end-to-end analysis of late deliveries across 96,203 orders from the Olist Brazilian e-commerce dataset, from SQL data validation and KPI design to an interactive Tableau dashboard. It shows when deliveries ran late, how late carrier handovers relate to them and which sellers to review first.",
+      de: "Eine durchgängige Analyse verspäteter Lieferungen in 96.203 Bestellungen aus dem brasilianischen Olist-E-Commerce-Datensatz, von SQL-Datenprüfung und KPI-Definition bis zum interaktiven Tableau-Dashboard. Sie zeigt, wann Lieferungen verspätet waren, wie verspätete Übergaben an den Versanddienst damit zusammenhängen und welche Verkäufer zuerst geprüft werden sollten.",
     },
-    tags: ["Data analysis", "Tableau", "KPIs"],
-    status: { en: "Dashboard", de: "Dashboard" },
+    tags: ["Data analysis", "SQL", "Tableau"],
+    status: { en: "SQL + Dashboard", de: "SQL + Dashboard" },
     page: "https://nazli-akmali.github.io/ecommerce-delivery/",
+    caseStudy: "https://github.com/nazli-akmali/ecommerce-delivery-analytics/blob/main/CASE_STUDY.md",
+    repo: "https://github.com/nazli-akmali/ecommerce-delivery-analytics",
     image: "https://nazli-akmali.github.io/ecommerce-delivery/images/dashboard.png",
   },
 ];

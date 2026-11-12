@@ -4,24 +4,41 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>E-commerce Delivery Performance — Seyedeh Nazli Akmali</title>
-  <meta name="description" content="An interactive Tableau dashboard on late deliveries in the Olist Brazilian e-commerce dataset: when deliveries ran late, how shipping delays drive them, and which sellers dispatch late.">
+  <meta name="description" content="SQL and Tableau analysis of delivery reliability in the Olist Brazilian e-commerce dataset: monthly late-delivery trends, shipping-deadline compliance and seller late-shipment rates.">
   <meta name="theme-color" content="#F5F2EC" media="(prefers-color-scheme: light)">
   <meta name="theme-color" content="#1A1A1C" media="(prefers-color-scheme: dark)">
   <meta property="og:title" content="E-commerce Delivery Performance">
-  <meta property="og:description" content="Interactive Tableau dashboard on late deliveries across 96,203 Olist orders.">
+  <meta property="og:description" content="SQL analysis and interactive Tableau dashboard on late deliveries across 96,203 Olist orders.">
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://nazli-akmali.github.io/ecommerce-delivery/">
   <meta property="og:image" content="https://nazli-akmali.github.io/ecommerce-delivery/images/dashboard.png">
   <link rel="stylesheet" href="site.css">
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%233F6B5A'/%3E%3Cpath d='M9 23V15M16 23V9M23 23v-5' fill='none' stroke='white' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
   <style>
+    .sr-only { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
     .hero { padding: 64px 0 48px; }
     .hero .wrap { display: block; }
     .hero .intro { max-width: var(--read); }
     .facts dl { grid-template-columns: repeat(4, 1fr); }
     @media (max-width: 760px) { .facts dl { grid-template-columns: 1fr 1fr; } }
 
-    .viz-block { padding: 56px 0 24px; }
+    .ext::after { content: "\2197"; display: inline-block; margin-left: .3em; font-weight: 400; }
+
+    /* Analytical approach */
+    .approach { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; margin: 36px 0 0; padding: 0; list-style: none; }
+    .approach li { border-top: 2px solid var(--accent); padding-top: 16px; }
+    .approach .num { display: block; font: 600 .78rem/1 var(--sans); letter-spacing: .1em; color: var(--accent); margin-bottom: 10px; }
+    .approach h3 { font-size: 1.12rem; margin-bottom: .45em; }
+    .approach p { margin: 0; color: var(--muted); font-size: .96rem; }
+    @media (max-width: 960px) { .approach { grid-template-columns: 1fr 1fr; gap: 28px 20px; } }
+    @media (max-width: 560px) { .approach { grid-template-columns: 1fr; } }
+
+    /* Dashboard embed */
+    .viz-block { padding: 72px 0 24px; }
+    .viz-bar { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px 32px; }
+    .viz-bar .intro { margin: 0; }
+    .viz-bar .intro p:last-child { margin-bottom: 0; }
+    .viz-bar .btns { margin: 0; }
     .viz-frame { max-width: 1202px; margin: 28px 24px 0; background: #FFFFFF; border: 1px solid var(--line); border-radius: 20px; box-shadow: var(--shadow); overflow-x: auto; -webkit-overflow-scrolling: touch; }
     .viz-frame iframe { display: block; width: 1200px; height: 1760px; border: 0; margin: 0 auto; }
     @media (min-width: 1250px) { .viz-frame { margin-inline: auto; } }
@@ -30,12 +47,26 @@
     .viz-note-sm { display: none; }
     @media (max-width: 1260px) { .viz-note-sm { display: inline; } }
 
+    /* Findings */
     .kpis { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 36px; }
-    .kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 24px 26px; }
-    .kpi b { display: block; font: 600 2.2rem/1.1 var(--serif); color: var(--accent); margin-bottom: 8px; }
-    .kpi p { margin: 0; color: var(--muted); font-size: .98rem; }
-    @media (max-width: 760px) { .kpis { grid-template-columns: 1fr; } }
-    @media (max-width: 760px) { .status { grid-template-columns: 1fr; } }
+    .kpi { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 24px 26px; display: flex; flex-direction: column; }
+    .kpi b { display: block; font: 600 2.2rem/1.1 var(--serif); color: var(--accent); margin-bottom: 6px; }
+    .kpi .what { font-weight: 650; font-size: 1rem; color: var(--text); margin: 0 0 8px; }
+    .kpi p { margin: 0 0 10px; color: var(--muted); font-size: .96rem; }
+    .kpi .so { margin: auto 0 0; padding-top: 12px; border-top: 1px solid var(--line); color: var(--text); font-size: .94rem; }
+    @media (max-width: 860px) { .kpis { grid-template-columns: 1fr; } }
+
+    /* Methodology */
+    .defs { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 36px; }
+    .defs .card { background: var(--surface); border: 1px solid var(--line); border-radius: 20px; padding: 24px 26px; }
+    .defs dl { margin: 0; }
+    .defs dt { font-weight: 650; margin-top: 14px; }
+    .defs dt:first-child { margin-top: 0; }
+    .defs dd { margin: 4px 0 0; color: var(--muted); font-size: .96rem; }
+    .defs h3 { font-family: var(--sans); font-size: 1rem; font-weight: 650; margin-bottom: .8em; }
+    .defs ul { margin: 0; padding-left: 1.2em; color: var(--muted); font-size: .96rem; }
+    .defs li { margin-bottom: .5em; }
+    @media (max-width: 760px) { .defs { grid-template-columns: 1fr; } .status { grid-template-columns: 1fr; } }
   </style>
 </head>
 <body>
@@ -43,8 +74,10 @@
     <div class="wrap">
       <a class="brand" href="https://nazli-akmali.github.io/">Nazli Akmali <span>/ Delivery Performance</span></a>
       <nav class="topnav" aria-label="Project">
+        <a class="hide-sm" href="#approach">Approach</a>
         <a href="#dashboard">Dashboard</a>
         <a href="#findings">Findings</a>
+        <a href="https://github.com/nazli-akmali/ecommerce-delivery-analytics" target="_blank" rel="noopener">GitHub<span class="sr-only"> (opens in a new tab)</span></a>
       </nav>
     </div>
   </header>
@@ -53,14 +86,14 @@
     <section class="hero">
       <div class="wrap">
         <div class="intro">
-          <p class="eyebrow">Data analysis · Tableau dashboard</p>
+          <p class="eyebrow">SQL analysis · PostgreSQL · Tableau</p>
           <h1>E-commerce Delivery Performance</h1>
-          <p class="lead">When do orders arrive late, and what drives it?</p>
-          <p class="muted">An interactive dashboard built on the public Olist Brazilian e-commerce dataset (January 2017 to August 2018). It tracks late deliveries over time, links them to shipping delays and ranks sellers by how often they dispatch late.</p>
+          <p class="lead">When do deliveries run late, and how are they linked to shipping delays and seller performance?</p>
+          <p class="muted">A self-directed analysis of historical orders from the public Olist Brazilian e-commerce dataset. It looks at delivery reliability over time, whether sellers hand orders to the carrier before their shipping deadline, and how late-shipment rates differ between sellers.</p>
           <div class="btns">
-            <a class="btn primary" href="#dashboard">Explore the dashboard
+            <a class="btn primary" href="#dashboard">Explore dashboard
               <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
-            <a class="btn" href="https://public.tableau.com/shared/8FNGWQ5PQ?:display_count=n&amp;:origin=viz_share_link" target="_blank" rel="noopener">Open on Tableau Public</a>
+            <a class="btn ext" href="https://github.com/nazli-akmali/ecommerce-delivery-analytics" target="_blank" rel="noopener">View SQL &amp; methodology on GitHub<span class="sr-only"> (opens in a new tab)</span></a>
           </div>
         </div>
       </div>
@@ -69,31 +102,67 @@
     <div class="facts">
       <div class="wrap">
         <dl>
-          <div><dt>Question</dt><dd>Where do late deliveries come from?</dd></div>
-          <div><dt>Data</dt><dd>Olist Brazilian E-commerce, Jan 2017 – Aug 2018</dd></div>
+          <div><dt>Dataset</dt><dd>Olist Brazilian E-Commerce (public)</dd></div>
+          <div><dt>Period</dt><dd>Orders purchased Jan 2017 – Aug 2018</dd></div>
           <div><dt>Scope</dt><dd>96,203 delivered orders</dd></div>
-          <div><dt>Built with</dt><dd>Tableau Public</dd></div>
+          <div><dt>Built with</dt><dd>PostgreSQL · SQL · Tableau Public</dd></div>
         </dl>
       </div>
     </div>
 
-    <section class="viz-block" id="dashboard">
+    <section class="block" id="approach">
       <div class="wrap">
         <div class="intro">
-          <p class="eyebrow">The dashboard</p>
-          <h2>Interactive view</h2>
-          <p>Hover over the charts for exact values.</p>
+          <p class="eyebrow">Analytical approach</p>
+          <h2>From raw tables to a dashboard</h2>
+        </div>
+        <ol class="approach">
+          <li>
+            <span class="num">01</span>
+            <h3>Data exploration &amp; preparation</h3>
+            <p>Imported order and order-item tables, then checked order statuses, missing timestamps and how the tables join, so items aren't counted as orders.</p>
+          </li>
+          <li>
+            <span class="num">02</span>
+            <h3>KPI definition &amp; SQL analysis</h3>
+            <p>Defined late-delivery rate, actual delivery time, shipping-deadline compliance and seller late-shipment rate, using CTEs, conditional aggregation and window functions.</p>
+          </li>
+          <li>
+            <span class="num">03</span>
+            <h3>Segmentation &amp; investigation</h3>
+            <p>Compared monthly trends, order structures, shipping-delay severity and sellers, with a minimum-volume rule for seller comparisons.</p>
+          </li>
+          <li>
+            <span class="num">04</span>
+            <h3>Dashboard development &amp; validation</h3>
+            <p>Built PostgreSQL views for reporting, designed the Tableau dashboard on top of them and cross-checked its figures against SQL queries.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="viz-block" id="dashboard">
+      <div class="wrap">
+        <div class="viz-bar">
+          <div class="intro">
+            <p class="eyebrow">The dashboard</p>
+            <h2>Interactive view</h2>
+            <p>Hover over the charts for exact values.</p>
+          </div>
+          <div class="btns">
+            <a class="btn ext" href="https://public.tableau.com/views/ecom_17944888496740/Dashboard1" target="_blank" rel="noopener">Open on Tableau Public<span class="sr-only"> (opens in a new tab)</span></a>
+          </div>
         </div>
       </div>
       <div class="viz-frame">
-          <iframe
-            src="https://public.tableau.com/shared/8FNGWQ5PQ?:embed=y&amp;:showVizHome=no&amp;:display_count=n&amp;:toolbar=yes&amp;:language=en-US"
-            title="E-commerce Delivery Performance dashboard on Tableau Public"
-            loading="lazy"
-            allowfullscreen></iframe>
+        <iframe
+          src="https://public.tableau.com/views/ecom_17944888496740/Dashboard1?:embed=y&amp;:showVizHome=no&amp;:display_count=n&amp;:toolbar=yes&amp;:language=en-US"
+          title="E-commerce Delivery Performance dashboard on Tableau Public"
+          loading="lazy"
+          allowfullscreen></iframe>
       </div>
       <div class="wrap">
-        <p class="viz-note muted"><span class="viz-note-sm">The dashboard is 1200px wide, so scroll sideways or </span><a href="https://public.tableau.com/shared/8FNGWQ5PQ?:display_count=n&amp;:origin=viz_share_link" target="_blank" rel="noopener">open it full-size on Tableau Public</a>.</p>
+        <p class="viz-note muted"><span class="viz-note-sm">The dashboard is 1200px wide, so scroll sideways inside the frame. </span>If it doesn't load, <a class="ext" href="https://public.tableau.com/views/ecom_17944888496740/Dashboard1" target="_blank" rel="noopener">open it on Tableau Public</a>.</p>
       </div>
     </section>
 
@@ -101,49 +170,108 @@
       <div class="wrap">
         <div class="intro">
           <p class="eyebrow">Key findings</p>
-          <h2>Late deliveries cluster in time and start before the parcel leaves the seller</h2>
-          <p>Overall, 6.79% of delivered orders arrived after the estimated date, with an average delivery time of 12.54 days. That average hides three patterns.</p>
+          <h2>Late deliveries cluster in time and are strongly associated with dispatch delays</h2>
+          <p>Overall, 6.79% of delivered orders arrived after the estimated date, and delivery took 12.54 days on average. Behind that average are three patterns.</p>
         </div>
         <div class="kpis">
           <div class="kpi">
             <b>18.96%</b>
-            <p>Late-delivery rate in March 2018, the peak month and nearly 2.8× the overall rate. November 2017 was a second spike at around 12%.</p>
+            <p class="what">Peak monthly late-delivery rate</p>
+            <p>March 2018, about 2.8× the overall rate of 6.79%. November 2017 was also elevated, at around 12%.</p>
+            <p class="so">Spikes this large point to specific periods worth investigating, not a constant background rate.</p>
           </div>
           <div class="kpi">
             <b>7.5×</b>
-            <p>Orders handed to the carrier more than 3 days late were late 41.85% of the time, against 5.57% for orders shipped on time.</p>
+            <p class="what">Higher late-delivery rate when dispatch is 3+ days late</p>
+            <p>Single-item orders handed to the carrier more than 3 days after the shipping deadline: 41.85% late, against 5.57% for orders handed over on time.</p>
+            <p class="so">Shipping-deadline compliance is visible days before delivery, which makes it a candidate early-warning signal.</p>
           </div>
           <div class="kpi">
-            <b>49–90%</b>
-            <p>Share of late dispatches among the ten worst sellers with at least 30 orders. For the worst one, 9 in 10 shipments left late.</p>
+            <b>~49–90%</b>
+            <p class="what">Late-shipment rates of the ten highest-ranked sellers</p>
+            <p>Each seller's share of orders handed over after the deadline, among sellers with at least 30 eligible orders.</p>
+            <p class="so">A small group of sellers misses deadlines on most orders, making them a focused starting point for follow-up.</p>
           </div>
         </div>
+        <p class="muted" style="margin-top:20px">This is a descriptive analysis of historical data. The patterns are associations and do not establish causes.</p>
+      </div>
+    </section>
 
+    <section class="block" id="method">
+      <div class="wrap">
+        <div class="intro">
+          <p class="eyebrow">Methodology</p>
+          <h2>What each number measures</h2>
+        </div>
+        <div class="defs">
+          <div class="card">
+            <dl>
+              <dt>Late delivery</dt>
+              <dd>Customer delivery after the estimated delivery date, compared by calendar day.</dd>
+              <dt>Late shipment</dt>
+              <dd>Carrier handover after the seller's shipping deadline, compared by exact timestamp.</dd>
+              <dt>Seller threshold</dt>
+              <dd>Only sellers with at least 30 eligible orders are ranked, to avoid over-reading extreme rates from a handful of orders. It reduces, but does not remove, statistical uncertainty.</dd>
+            </dl>
+          </div>
+          <div class="card">
+            <h3>Populations</h3>
+            <ul>
+              <li>Headline KPIs and the monthly trend use delivered orders with valid delivery and estimate dates.</li>
+              <li>Shipping-delay and seller analyses use delivered single-item orders with the needed shipping timestamps, so each handover links to exactly one seller and one deadline.</li>
+              <li>Comparisons are not adjusted for region, carrier, product category or season.</li>
+            </ul>
+            <p style="margin:16px 0 0"><a class="ext" href="https://github.com/nazli-akmali/ecommerce-delivery-analytics" target="_blank" rel="noopener">Full definitions, SQL and limitations on GitHub</a></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="block" id="implications">
+      <div class="wrap">
+        <div class="intro">
+          <p class="eyebrow">Business implications</p>
+          <h2>Where an operations team could look next</h2>
+          <p>These are recommendations and open questions. None of them was implemented or tested in this project.</p>
+        </div>
         <div class="status">
           <div class="card">
-            <h3>Method</h3>
+            <h3>Recommended investigations</h3>
             <ul>
-              <li>Headline KPIs and the monthly trend use all delivered orders</li>
-              <li>Shipping-delay and seller analyses use single-item delivered orders only, so each delay can be attributed to one seller</li>
-              <li>Seller ranking is limited to sellers with at least 30 eligible orders</li>
+              <li>Break down the March 2018 spike by region, carrier, product mix and order volume</li>
+              <li>Monitor shipping-deadline compliance, especially handovers more than three days late</li>
+              <li>Prioritise follow-up with eligible sellers whose late-shipment rates stay high, considering order volume alongside the rate</li>
             </ul>
           </div>
           <div class="card open">
-            <h3>Questions I'd explore next</h3>
+            <h3>Open analytical questions</h3>
             <ul>
-              <li>What caused the March 2018 peak: order volume, carriers or regions?</li>
-              <li>Would dispatch deadlines or alerts for repeat-late sellers reduce late deliveries?</li>
-              <li>How do late deliveries affect review scores and repeat purchases?</li>
+              <li>Could alerts for orders past their shipping limit flag at-risk deliveries early enough to act?</li>
+              <li>How do late deliveries relate to review scores and repeat purchases?</li>
+              <li>Do the seller differences hold within the same region and product category?</li>
             </ul>
           </div>
         </div>
       </div>
     </section>
+
+    <div class="wrap">
+      <div class="cta">
+        <div>
+          <h2>SQL &amp; methodology</h2>
+          <p>All SQL scripts, the case study with KPI definitions and limitations, and the Tableau calculation notes are on GitHub.</p>
+        </div>
+        <div class="btns">
+          <a class="btn ext" href="https://github.com/nazli-akmali/ecommerce-delivery-analytics" target="_blank" rel="noopener">View on GitHub<span class="sr-only"> (opens in a new tab)</span></a>
+          <a class="btn ghost ext" href="https://public.tableau.com/views/ecom_17944888496740/Dashboard1" target="_blank" rel="noopener">Open on Tableau Public<span class="sr-only"> (opens in a new tab)</span></a>
+        </div>
+      </div>
+    </div>
   </main>
 
   <footer class="footer">
     <div class="wrap">
-      <span>Created by <strong>Seyedeh Nazli Akmali</strong>. Data: Olist Brazilian E-commerce public dataset.</span>
+      <span>Created by <strong>Seyedeh Nazli Akmali</strong>. Data: Olist Brazilian E-Commerce public dataset.</span>
       <span><a href="https://nazli-akmali.github.io/">Portfolio</a></span>
     </div>
   </footer>
