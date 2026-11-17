@@ -43,7 +43,7 @@
 <p><strong>Status:</strong> Functional MVP described in the implementation documentation; user validation pending.<br />
 <strong>Built with:</strong> Vanilla JavaScript, localStorage, TheMealDB, and optional receipt OCR.<br />
 <strong>Project focus:</strong> Product discovery, UX iteration, and AI-assisted implementation.</p>
-<p><strong><a href="https://nazli-akmali.github.io/meal-recommender/">Project page</a> · <a href="https://nazli-akmali.github.io/meal-recommender/case-study/">Case study</a></strong></p>
+<p><strong><a href="https://nazli-akmali.github.io/meal-planner/">Project page</a> · <a href="https://nazli-akmali.github.io/meal-planner/case-study/">Case study</a></strong></p>
 <h2 id="the-problem">The problem</h2>
 <p>Choosing lunch or dinner means balancing what sounds appealing with what is already at home, how much time cooking takes, and what has been eaten recently. Turning that choice into a shopping list adds another task.</p>
 <p>Meal Planner explores whether starting with familiar recipes and making ingredient availability visible can reduce the effort of choosing a practical next meal.</p>
@@ -108,12 +108,12 @@
 </tr>
 </tbody>
 </table></div>
-<p>See <a href="../technical-notes/">technical notes</a> for scoring weights, integration boundaries, and implementation details, and the <a href="https://nazli-akmali.github.io/meal-recommender/nutrition-spec/">nutrition specification</a> for target-estimation logic.</p>
+<p>See <a href="../technical-notes/">technical notes</a> for scoring weights, integration boundaries, and implementation details, and the <a href="https://nazli-akmali.github.io/meal-planner/nutrition-spec/">nutrition specification</a> for target-estimation logic.</p>
 <h2 id="data-and-privacy">Data and privacy</h2>
 <p>App records are stored in this browser's localStorage, with JSON export/import and deletion controls. There is no account, application backend, or cross-device synchronization. Clearing site data removes local records, so keep an export when needed.</p>
 <p>Optional services have separate data flows: TheMealDB receives an ingredient name; external vision receives the receipt image. On-device OCR processes images locally after downloading its runtime. A shared deployment needs a server-side integration for secret API keys.</p>
 <h2 id="showcase-site">Showcase site</h2>
-<p>The <a href="https://nazli-akmali.github.io/meal-recommender/">project page</a> and rendered docs are hosted by my portfolio site, so this repository can stay private. There is no public live demo, since that would publish the source code. <code>site/build.py</code> builds them from <code>site/showcase.json</code>; <code>python3 site/build.py --publish</code> copies a fresh build into the portfolio repo (<code>../nazli-akmali.github.io/meal-recommender/</code>), which is then committed and pushed. Needs <code>pip install markdown==3.7</code>.</p>
+<p>The <a href="https://nazli-akmali.github.io/meal-planner/">project page</a> and rendered docs are hosted by my portfolio site, so this repository can stay private. There is no public live demo, since that would publish the source code. <code>site/build.py</code> builds them from <code>site/showcase.json</code>; <code>python3 site/build.py --publish</code> copies a fresh build into the portfolio repo (<code>../nazli-akmali.github.io/meal-planner/</code>), which is then committed and pushed. Needs <code>pip install markdown==3.7</code>.</p>
 <h2 id="current-limitations">Current limitations</h2>
 <ul>
 <li><strong>Nutrition completeness:</strong> No ingredient nutrition database is connected. Recipe values must be supplied, and incomplete totals are labeled. Estimates are not medical advice.</li>
